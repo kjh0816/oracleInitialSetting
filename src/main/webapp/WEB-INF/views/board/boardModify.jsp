@@ -15,6 +15,7 @@
 			var $frm = $j('.boardModify :input');
 			var param = $frm.serialize();
 			
+			
 			$j.ajax({
 			    url : "/board/boardModifyAction.do",
 			    dataType: "json",
@@ -24,7 +25,6 @@
 			    {
 					alert("수정 완료");
 					
-					alert("메세지:"+data.success);
 					
 					location.href = "/board/" + data.boardType + "/"+ data.boardNum+"/boardView.do";
 			    },
