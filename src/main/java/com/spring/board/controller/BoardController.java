@@ -157,10 +157,13 @@ public class BoardController {
 		
 		
 		result.put("success", (isBoardModified > 0)?"Y":"N");
-		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 		
 		result.put("boardType", boardVo.getBoardType());
 		result.put("boardNum", Integer.toString(boardVo.getBoardNum()));
+		
+		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+		
+		
 		
 		
 		

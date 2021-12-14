@@ -26,7 +26,7 @@
 					
 					alert("¸Þ¼¼Áö:"+data.success);
 					
-					location.href = "/board/boardList.do";
+					location.href = "/board/" + data.boardType + "/"+ data.boardNum+"/boardView.do";
 			    },
 			    error: function (jqXHR, textStatus, errorThrown)
 			    {
