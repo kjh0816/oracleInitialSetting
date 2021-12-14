@@ -12,7 +12,7 @@
 	$j(document).ready(function(){
 		
 		$j("#submit").on("click",function(){
-			var $frm = $j('.boardWrite :input');
+			var $frm = $j('.boardModify :input');
 			var param = $frm.serialize();
 			
 			$j.ajax({
@@ -49,10 +49,13 @@
 		<tr>
 			<td>
 				<table border ="1"> 
+				<input name="boardType" type="hidden" size="50" value="${board.boardType}">
+				<input name="boardNum" type="hidden" size="50" value="${board.boardNum}">
 					<tr>
 						<td width="120" align="center">
 						Title
 						</td>
+						
 						<td width="400">
 						<input name="boardTitle" type="text" size="50" value="${board.boardTitle}"> 
 						</td>

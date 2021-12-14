@@ -58,4 +58,10 @@ public class boardServiceImpl implements boardService{
 		// TODO Auto-generated method stub
 		return boardDao.boardDelete(boardVo);
 	}
+	
+	@Override
+	public int boardModify(BoardVo boardVo) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.boardModify(boardVo);
+	}
 }

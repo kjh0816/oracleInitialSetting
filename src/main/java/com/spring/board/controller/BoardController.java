@@ -99,7 +99,7 @@ public class BoardController {
 		String result = isBoardDeleted > 0?"Y":"N";
 		
 		
-		return "<script>alert('success: " + result + "'); location.href='/board/boardList.do'</script>";
+		return "<script>alert('success: " + result + "'); location.href='/board/"+  boardType + "/" +boardNum + "/boardView.do'</script>";
 		
 	}
 	
@@ -119,6 +119,58 @@ public class BoardController {
 		model.addAttribute("board", boardVo);
 		
 		return "board/boardModify";
+	}
+	
+	
+	@RequestMapping(value = "/board/boardModifyAction.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String boardModifyAction(Locale locale
+			, PageVo pageVo
+			, BoardVo boardVo
+			) throws Exception{
+		
+		System.out.println("Controller 실행됨");
+		System.out.println("Controller 실행됨");
+		System.out.println("Controller 실행됨");
+		System.out.println("Controller 실행됨");
+		System.out.println("Controller 실행됨");
+		System.out.println("Controller 실행됨");
+		
+		System.out.println("제목: " + boardVo.getBoardComment());
+		System.out.println("내용: " + boardVo.getBoardTitle());
+		System.out.println("게시판 번호: " + boardVo.getBoardType());
+		System.out.println("게시물 번호: " + boardVo.getBoardNum());
+		
+		
+		
+				
+		
+		
+		int isBoardModified = boardService.boardModify(boardVo);
+		
+		
+		
+		
+		HashMap<String, String> result = new HashMap<String, String>();
+		CommonUtil commonUtil = new CommonUtil();
+		
+		
+		
+		result.put("success", (isBoardModified > 0)?"Y":"N");
+		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+		
+		result.put("boardType", boardVo.getBoardType());
+		result.put("boardNum", Integer.toString(boardVo.getBoardNum()));
+		
+		
+		
+		System.out.println("callbackMsg::" + callbackMsg);
+		
+		return callbackMsg;
+		
+		
+		
+		
 	}
 	
 	
