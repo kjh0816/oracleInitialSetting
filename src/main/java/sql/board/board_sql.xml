@@ -75,4 +75,13 @@
         ,TO_CHAR(SYSDATE)
         )
     </select>
+    
+    <select id="boardDelete" parameterType="com.spring.board.vo.BoardVo">
+        DELETE FROM 
+        BOARD
+    	WHERE 	BOARD_TYPE = #{boardType}
+    	AND 	BOARD_NUM  = #{boardNum}
+    </select>
+    
+    
 </mapper>

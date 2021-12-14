@@ -8,6 +8,10 @@
 <title>boardView</title>
 </head>
 <body>
+<script type="text/javascript">
+
+
+</script>
 <table align="center">
 	<tr>
 		<td>
@@ -41,6 +45,10 @@
 	<tr>
 		<td align="right">
 			<a href="/board/boardList.do">List</a>
+			<br>
+			<a href="/board/${board.boardType}/${board.boardNum}/boardModify.do">수정하기</a>
+			<br>
+			<a href="/board/boardDeleteAction.do?boardType=${board.boardType}&boardNum=${board.boardNum}">삭제하기</a>
 		</td>
 	</tr>
 </table>	

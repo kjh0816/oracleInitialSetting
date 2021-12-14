@@ -73,6 +73,56 @@ public class BoardController {
 		return "board/boardView";
 	}
 	
+	
+	
+	@RequestMapping(value = "/board/boardDeleteAction.do", method = RequestMethod.GET)
+	@ResponseBody
+	public String boardDeleteAction(Locale locale
+			, PageVo pageVo
+			, @RequestParam String boardType
+			, @RequestParam int boardNum
+			) throws Exception{
+		
+		BoardVo boardVo = new BoardVo();
+		
+		boardVo = boardService.selectBoard(boardType,boardNum);
+		
+		
+		int isBoardDeleted = boardService.boardDelete(boardVo);
+		
+		
+		
+		System.out.println("삭제 시, 반환된 int 값:" + isBoardDeleted);
+		
+
+		
+		String result = isBoardDeleted > 0?"Y":"N";
+		
+		
+		return "<script>alert('success: " + result + "'); location.href='/board/boardList.do'</script>";
+		
+	}
+	
+	
+	@RequestMapping(value = "/board/{boardType}/{boardNum}/boardModify.do", method = RequestMethod.GET)
+	public String boardModify(Locale locale, Model model
+			,@PathVariable("boardType")String boardType
+			,@PathVariable("boardNum")int boardNum) throws Exception{
+		
+		BoardVo boardVo = new BoardVo();
+		
+		
+		boardVo = boardService.selectBoard(boardType,boardNum);
+		
+		model.addAttribute("boardType", boardType);
+		model.addAttribute("boardNum", boardNum);
+		model.addAttribute("board", boardVo);
+		
+		return "board/boardModify";
+	}
+	
+	
+	
 	@RequestMapping(value = "/board/boardWrite.do", method = RequestMethod.GET)
 	public String boardWrite(Locale locale, Model model) throws Exception{
 		

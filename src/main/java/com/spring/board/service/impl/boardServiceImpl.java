@@ -52,4 +52,10 @@ public class boardServiceImpl implements boardService{
 		return boardDao.boardInsert(boardVo);
 	}
 	
+	
+	@Override
+	public int boardDelete(BoardVo boardVo) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.boardDelete(boardVo);
+	}
 }

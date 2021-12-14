@@ -16,13 +16,13 @@
 			var param = $frm.serialize();
 			
 			$j.ajax({
-			    url : "/board/boardWriteAction.do",
+			    url : "/board/boardModifyAction.do",
 			    dataType: "json",
 			    type: "POST",
 			    data : param,
 			    success: function(data, textStatus, jqXHR)
 			    {
-					alert("작성완료");
+					alert("수정 완료");
 					
 					alert("메세지:"+data.success);
 					
@@ -39,11 +39,11 @@
 
 </script>
 <body>
-<form class="boardWrite">
+<form class="boardModify">
 	<table align="center">
 		<tr>
 			<td align="right">
-			<input id="submit" type="button" value="작성">
+			<input id="submit" type="button" value="수정 완료">
 			</td>
 		</tr>
 		<tr>
