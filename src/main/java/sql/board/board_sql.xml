@@ -64,9 +64,9 @@
         )
         VALUES
         ('1'
-        ,(SELECT TO_NUMBER(MAX(BOARD_NUM)+1)
+        ,NVL((SELECT TO_NUMBER(MAX(BOARD_NUM)+1)
 	    FROM BOARD
-	    WHERE BOARD_TYPE = '1')
+	    WHERE BOARD_TYPE = '1'), 1)
         ,#{boardTitle}
         ,#{boardComment}
         ,'SYSTEM'
@@ -77,8 +77,8 @@
     </select>
     
     <select id="boardDelete" parameterType="com.spring.board.vo.BoardVo">
-        DELETE FROM 
-        BOARD
+        DELETE 
+        FROM BOARD
     	WHERE 	BOARD_TYPE = #{boardType}
     	AND 	BOARD_NUM  = #{boardNum}
     </select>
@@ -86,8 +86,8 @@
     <select id="boardModify" parameterType="com.spring.board.vo.BoardVo">
         UPDATE BOARD
         SET 
-        BOARD_TITLE = #{boardTitle},
-        BOARD_COMMENT = #{boardComment}
+	        BOARD_TITLE = #{boardTitle},
+	        BOARD_COMMENT = #{boardComment}
     	WHERE 	BOARD_TYPE = #{boardType}
     	AND 	BOARD_NUM  = #{boardNum}
     </select>

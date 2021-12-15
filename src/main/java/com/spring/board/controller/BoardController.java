@@ -35,7 +35,13 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "/board/boardList.do", method = RequestMethod.GET)
-	public String boardList(Locale locale, Model model,PageVo pageVo) throws Exception{
+	public String boardList(Locale locale
+			, Model model
+			, PageVo pageVo
+			, @RequestParam(defaultValue="boardAll") String boardType
+			) throws Exception{
+		
+		
 		
 		List<BoardVo> boardList = new ArrayList<BoardVo>();
 		
@@ -43,15 +49,24 @@ public class BoardController {
 		int totalCnt = 0;
 		
 		if(pageVo.getPageNo() == 0){
-			pageVo.setPageNo(page);;
+			pageVo.setPageNo(page);
 		}
 		
-		boardList = boardService.SelectBoardList(pageVo);
-		totalCnt = boardService.selectBoardCnt();
+		// boardType에 따라 검색되는 결과가 다르므로, 페이지 수도 다르다.
+		if(boardType.equals("boardAll")) {
+			boardList = boardService.SelectBoardList(pageVo);
+			totalCnt = boardService.selectBoardCnt();
+		}else{
+			boardList = boardService.SelectBoardList(pageVo);
+			totalCnt = boardService.selectBoardCnt(); 
+		}
+		
 		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("pageNo", page);
+		
+		model.addAttribute("boardType", boardType);
 		
 		return "board/boardList";
 	}
@@ -99,7 +114,7 @@ public class BoardController {
 		String result = isBoardDeleted > 0?"Y":"N";
 		
 		
-		return "<script>alert('success: " + result + "'); location.href='/board/"+  boardType + "/" +boardNum + "/boardView.do'</script>";
+		return "<script>alert('success: " + result + "'); location.href='/board/boardList.do'</script>";
 		
 	}
 	
