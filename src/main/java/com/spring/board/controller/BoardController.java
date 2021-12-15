@@ -211,6 +211,8 @@ public class BoardController {
 	@ResponseBody
 	public String boardWriteAction(Locale locale,BoardVo boardVo) throws Exception{
 		
+		
+		
 		HashMap<String, String> result = new HashMap<String, String>();
 		CommonUtil commonUtil = new CommonUtil();
 		
