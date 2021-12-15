@@ -38,7 +38,7 @@ public class BoardController {
 	public String boardList(Locale locale
 			, Model model
 			, PageVo pageVo
-			, @RequestParam(defaultValue="boardAll") String boardType
+			, @RequestParam(defaultValue="all") String boardType
 			) throws Exception{
 		
 		
@@ -52,14 +52,10 @@ public class BoardController {
 			pageVo.setPageNo(page);
 		}
 		
-		// boardType에 따라 검색되는 결과가 다르므로, 페이지 수도 다르다.
-		if(boardType.equals("boardAll")) {
-			boardList = boardService.SelectBoardList(pageVo);
-			totalCnt = boardService.selectBoardCnt();
-		}else{
-			boardList = boardService.SelectBoardList(pageVo);
-			totalCnt = boardService.selectBoardCnt(); 
-		}
+		
+		boardList = boardService.SelectBoardList(pageVo);
+		totalCnt = boardService.selectBoardCnt();
+		
 		
 		
 		model.addAttribute("boardList", boardList);

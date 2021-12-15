@@ -31,23 +31,21 @@
 		var boardType = "${boardType}";
 		
 		
-		if(boardType == 'boardAll'){
-			$j('#boardAll').prop("checked", true);
+		if(boardType == 'all'){
+			$j('#all').prop("checked", true);
 		}
-		if(boardType == 'boardNormal'){
+		if(boardType == 'a01'){
 			$j('#boardNormal').prop("checked", true);
 		}
-		if(boardType == 'boardQuestion'){
+		if(boardType == 'a02'){
 			$j('#boardQuestion').prop("checked", true);
 		}
-		if(boardType == 'boardAnonymous'){
+		if(boardType == 'a03'){
 			$j('#boardAnonymous').prop("checked", true);
 		}
-		if(boardType == 'boardFree'){
+		if(boardType == 'a04'){
 			$j('#boardFree').prop("checked", true);
 		}
-		
-		
 		
 	}
 </script>
@@ -86,15 +84,15 @@
 		
 			<tr align="left">
 				<td>
-					<input type="radio" name="boardType" value="boardAll" id="boardAll">
+					<input type="radio" name="boardType" value="all" id="all">
 					<span>전체</span>
-					<input type="radio" name="boardType" value="boardNormal" id="boardNormal">
+					<input type="radio" name="boardType" value="a01" id="boardNormal">
 					<span>일반</span>
-					<input type="radio" name="boardType" value="boardQuestion" id="boardQuestion">
+					<input type="radio" name="boardType" value="a02" id="boardQuestion">
 					<span>Q&A</span>
-					<input type="radio" name="boardType" value="boardAnonymous" id="boardAnonymous">
+					<input type="radio" name="boardType" value="a03" id="boardAnonymous">
 					<span>익명</span>
-					<input type="radio" name="boardType" value="boardFree" id="boardFree">
+					<input type="radio" name="boardType" value="a04" id="boardFree">
 					<span>자유</span>
 					<button onClick="searchByBoardType();">조회</button>
 				</td>
