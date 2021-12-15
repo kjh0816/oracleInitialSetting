@@ -68,7 +68,7 @@
 					</tr>
 					<c:forEach items="${boardList}" var="list">
 						<tr>
-							<td align="center">${list.boardType}</td>
+							<td align="center">${list.extra__codeName}</td>
 							<td>${list.boardNum}</td>
 							<td><a
 								href="/board/${list.boardType}/${list.boardNum}/boardView.do?pageNo=${pageNo}">${list.boardTitle}</a>

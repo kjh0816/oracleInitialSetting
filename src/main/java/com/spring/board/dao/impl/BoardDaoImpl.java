@@ -1,5 +1,6 @@
 package com.spring.board.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,15 +29,21 @@ public class BoardDaoImpl implements BoardDao{
 	 * 
 	 * */
 	@Override
-	public List<BoardVo> selectBoardList(PageVo pageVo) throws Exception {
+	public List<BoardVo> selectBoardList(HashMap<String, Object> params) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("board.boardList",pageVo);
+		return sqlSession.selectList("board.boardList",params);
 	}
 	
 	@Override
 	public int selectBoardCnt() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("board.boardTotal");
+	}
+	
+	@Override
+	public int selectBoardCntByComCode(String boardType) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("board.boardTotalByComCode", boardType);
 	}
 	
 	@Override

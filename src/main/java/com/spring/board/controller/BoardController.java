@@ -52,9 +52,20 @@ public class BoardController {
 			pageVo.setPageNo(page);
 		}
 		
+		HashMap<String, Object> params = new HashMap<String, Object>();
 		
-		boardList = boardService.SelectBoardList(pageVo);
-		totalCnt = boardService.selectBoardCnt();
+		params.put("pageNo", pageVo.getPageNo());
+		params.put("boardType", boardType);
+		
+		
+		boardList = boardService.SelectBoardList(params);
+		if(boardType.equals("all")) {
+			totalCnt = boardService.selectBoardCnt();
+		}
+		else {
+			totalCnt = boardService.selectBoardCntByComCode(boardType);
+		}
+		
 		
 		
 		

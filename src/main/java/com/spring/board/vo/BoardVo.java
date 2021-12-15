@@ -10,6 +10,17 @@ public class BoardVo {
 	private String	modifier;
 	private int totalCnt;
 	
+	private String extra__codeName;
+	
+	
+	public String getExtra__codeName() {
+		return extra__codeName;
+	}
+	public void setExtra__codeName(String extra__codeName) {
+		this.extra__codeName = extra__codeName;
+	}
+	
+	
 	
 	public int getTotalCnt() {
 		return totalCnt;

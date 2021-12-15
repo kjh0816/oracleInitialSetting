@@ -1,5 +1,6 @@
 package com.spring.board.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +24,22 @@ public class boardServiceImpl implements boardService{
 	}
 	
 	@Override
-	public List<BoardVo> SelectBoardList(PageVo pageVo) throws Exception {
+	public List<BoardVo> SelectBoardList(HashMap<String, Object> params) throws Exception {
 		// TODO Auto-generated method stub
 		
-		return boardDao.selectBoardList(pageVo);
+		return boardDao.selectBoardList(params);
 	}
 	
 	@Override
 	public int selectBoardCnt() throws Exception {
 		// TODO Auto-generated method stub
 		return boardDao.selectBoardCnt();
+	}
+	
+	@Override
+	public int selectBoardCntByComCode(String boardType) throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.selectBoardCntByComCode(boardType);
 	}
 	
 	@Override
