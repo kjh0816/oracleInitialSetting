@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.spring.board.vo.BoardVo;
+import com.spring.board.vo.ComCodeVo;
 import com.spring.board.vo.PageVo;
 
 public interface boardService {
@@ -22,7 +23,9 @@ public interface boardService {
 
 	public int boardDelete(BoardVo boardVo) throws Exception;
 
-	public int boardModify(BoardVo boardVo) throws Exception;
+	public int boardModify(BoardVo boardVo) throws Exception;	
+
+	public List<ComCodeVo> selectComCodeList() throws Exception;
 
 	
 

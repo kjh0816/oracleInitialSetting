@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.board.HomeController;
 import com.spring.board.service.boardService;
 import com.spring.board.vo.BoardVo;
+import com.spring.board.vo.ComCodeVo;
 import com.spring.board.vo.PageVo;
 import com.spring.common.CommonUtil;
 
@@ -49,11 +50,9 @@ public class BoardController {
 		
 		List<BoardVo> boardList = new ArrayList<BoardVo>();
 		
-		System.out.println(boardTypesChecked == null);
-		System.out.println(boardTypesChecked == null);
-		System.out.println(boardTypesChecked == null);
-		System.out.println(boardTypesChecked == null);
+		List<ComCodeVo> comCodeList = new ArrayList<ComCodeVo>();
 		
+		comCodeList = boardService.selectComCodeList();
 		
 		
 		int page = 1;
@@ -68,18 +67,11 @@ public class BoardController {
 		params.put("pageNo", pageVo.getPageNo());
 		
 		if(boardTypesChecked == null || boardTypesChecked.isEmpty()) {
-			System.out.println("if 내부 실행됨");
-			System.out.println("if 내부 실행됨");
-			System.out.println("if 내부 실행됨");
-			System.out.println("if 내부 실행됨");
+
 			// null 인 경우, 전체 게시물을 출력하므로, 전체 게시물을 카운트한다.
 			totalCnt = boardService.selectBoardCnt();
 		}else {
-			System.out.println("else 내부 실행됨");
-			System.out.println("else 내부 실행됨");
-			System.out.println("else 내부 실행됨");
-			System.out.println("else 내부 실행됨");
-			
+
 			params.put("boardType", boardTypesChecked);
 			totalCnt = boardService.selectBoardCntByComCode(params);
 		}
@@ -91,6 +83,7 @@ public class BoardController {
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("pageNo", page);
+		model.addAttribute("comCodeList", comCodeList);
 		
 		
 		return "board/boardList";
@@ -171,22 +164,6 @@ public class BoardController {
 			, PageVo pageVo
 			, BoardVo boardVo
 			) throws Exception{
-		
-		System.out.println("Controller 실행됨");
-		System.out.println("Controller 실행됨");
-		System.out.println("Controller 실행됨");
-		System.out.println("Controller 실행됨");
-		System.out.println("Controller 실행됨");
-		System.out.println("Controller 실행됨");
-		
-		System.out.println("제목: " + boardVo.getBoardComment());
-		System.out.println("내용: " + boardVo.getBoardTitle());
-		System.out.println("게시판 번호: " + boardVo.getBoardType());
-		System.out.println("게시물 번호: " + boardVo.getBoardNum());
-		
-		
-		
-				
 		
 		
 		int isBoardModified = boardService.boardModify(boardVo);

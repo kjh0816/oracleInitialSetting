@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.spring.board.dao.BoardDao;
 import com.spring.board.service.boardService;
 import com.spring.board.vo.BoardVo;
+import com.spring.board.vo.ComCodeVo;
 import com.spring.board.vo.PageVo;
 
 @Service
@@ -40,6 +41,12 @@ public class boardServiceImpl implements boardService{
 	public int selectBoardCntByComCode(HashMap<String, Object> params) throws Exception {
 		// TODO Auto-generated method stub
 		return boardDao.selectBoardCntByComCode(params);
+	}
+	
+	@Override
+	public List<ComCodeVo> selectComCodeList() throws Exception {
+		// TODO Auto-generated method stub
+		return boardDao.selectComCodeList();
 	}
 	
 	@Override

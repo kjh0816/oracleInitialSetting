@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.board.dao.BoardDao;
 import com.spring.board.vo.BoardVo;
+import com.spring.board.vo.ComCodeVo;
 import com.spring.board.vo.PageVo;
 
 @Repository
@@ -32,6 +33,12 @@ public class BoardDaoImpl implements BoardDao{
 	public List<BoardVo> selectBoardList(HashMap<String, Object> params) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("board.boardList",params);
+	}
+	
+	@Override
+	public List<ComCodeVo> selectComCodeList() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("board.comCodeList");
 	}
 	
 	@Override

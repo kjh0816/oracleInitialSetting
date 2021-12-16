@@ -10,32 +10,46 @@
 <script type="text/javascript">
 
 	$j(document).ready(function() {
+		
+		
+		$j('input[type="checkbox"]').change(function(){
+			
+			const allCheckBoxesCheckedLength = $j('input[name="boardTypesChecked"]:checked').length;
+			const allCheckBoxesLength = $j('input[name="boardTypesChecked"]').length;
+			
+			if(allCheckBoxesLength == allCheckBoxesCheckedLength){
+		    	$j('input[type="checkbox"][name="all"]').prop('checked', true);  
+			}else{
+			    $j('input[type="checkbox"][name="all"]').prop('checked', false);  
+			}
+		
+		});
+		
+		
+		const $allCheckBoxes = $j('input[type="checkbox"][name="all"]');
+		const $checkboxes = $j('input[type="checkbox"]');
+		
+		
+		  $allCheckBoxes.change(function(){
+		    
+			  
+		    if(!this.checked){
+		      $checkboxes.prop('checked', true);
+		    }else{
+		      $checkboxes.prop('checked', false);
+		    }
+		    
+		  });
+		  
+
 
 	});
 	
 	
-	function setBoardType(){
-		
-		var boardType = "${boardType}";
-		
-		
-		if(boardType == 'all'){
-			$j('#all').prop("checked", true);
-		}
-		if(boardType == 'a01'){
-			$j('#boardNormal').prop("checked", true);
-		}
-		if(boardType == 'a02'){
-			$j('#boardQuestion').prop("checked", true);
-		}
-		if(boardType == 'a03'){
-			$j('#boardAnonymous').prop("checked", true);
-		}
-		if(boardType == 'a04'){
-			$j('#boardFree').prop("checked", true);
-		}
-		
-	}
+	
+	
+	
+	
 </script>
 <body>
 
@@ -73,8 +87,16 @@
 			<tr align="left">
 				<td>
 				<form action="/board/boardList.do" method="POST">
-					<input type="checkbox" name="all" id="all">
+					<input type="checkbox" name="all">
 					<span>전체</span>
+					
+					<c:forEach var="comCode" items="${comCodesList}" begin="0" end="3" step="1" varStatus="status">
+					
+					<input type="checkbox" name="boardTypesChecked" value="${comCode.codeId}">
+					<span>${comCode.codeId }</span>
+					</c:forEach>
+					
+					
 					<input type="checkbox" name="boardTypesChecked" value="a01">
 					<span>일반</span>
 					<input type="checkbox" name="boardTypesChecked" value="a02">
