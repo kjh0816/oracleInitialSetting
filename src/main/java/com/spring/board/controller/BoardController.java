@@ -41,16 +41,20 @@ public class BoardController {
 			, HttpServletRequest request
 			, Model model
 			, PageVo pageVo
+			, @RequestParam(value="boardTypesChecked", required=true, defaultValue="") List<String> boardTypesChecked
 			) throws Exception{
 		
-		String[] boardTypesChecked = request.getParameterValues("boardTypesChecked[]");
 		
-		System.out.println("==== 컨트롤러 실행됨 ====");
-		
-		
-		
+
 		
 		List<BoardVo> boardList = new ArrayList<BoardVo>();
+		
+		System.out.println(boardTypesChecked == null);
+		System.out.println(boardTypesChecked == null);
+		System.out.println(boardTypesChecked == null);
+		System.out.println(boardTypesChecked == null);
+		
+		
 		
 		int page = 1;
 		int totalCnt = 0;
@@ -63,28 +67,27 @@ public class BoardController {
 		
 		params.put("pageNo", pageVo.getPageNo());
 		
-		if(boardTypesChecked == null) {
+		if(boardTypesChecked == null || boardTypesChecked.isEmpty()) {
+			System.out.println("if 내부 실행됨");
+			System.out.println("if 내부 실행됨");
+			System.out.println("if 내부 실행됨");
+			System.out.println("if 내부 실행됨");
 			// null 인 경우, 전체 게시물을 출력하므로, 전체 게시물을 카운트한다.
 			totalCnt = boardService.selectBoardCnt();
 		}else {
+			System.out.println("else 내부 실행됨");
+			System.out.println("else 내부 실행됨");
+			System.out.println("else 내부 실행됨");
+			System.out.println("else 내부 실행됨");
+			
 			params.put("boardType", boardTypesChecked);
 			totalCnt = boardService.selectBoardCntByComCode(params);
 		}
 		
 		
-		
-		
 		boardList = boardService.SelectBoardList(params);
 		
-			
-		
 
-		
-		
-//		
-//		
-//		
-//		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("pageNo", page);
@@ -94,62 +97,6 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping(value = "/board/boardListCheckbox.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String boardListCheckbox(Locale locale
-			, HttpServletRequest request
-			, Model model
-			, PageVo pageVo
-			) throws Exception{
-		
-		String[] boardTypesChecked = request.getParameterValues("boardTypesChecked[]");
-		
-		System.out.println("==== 컨트롤러 실행됨 ====");
-		
-		
-		
-		
-		List<BoardVo> boardList = new ArrayList<BoardVo>();
-		
-		int page = 1;
-		int totalCnt = 0;
-		
-		if(pageVo.getPageNo() == 0){
-			pageVo.setPageNo(page);
-		}
-		
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		
-		params.put("pageNo", pageVo.getPageNo());
-		
-		if(boardTypesChecked == null) {
-			// null 인 경우, 전체 게시물을 출력하므로, 전체 게시물을 카운트한다.
-			totalCnt = boardService.selectBoardCnt();
-		}else {
-			params.put("boardType", boardTypesChecked);
-			totalCnt = boardService.selectBoardCntByComCode(params);
-		}
-		
-		
-		
-		
-		boardList = boardService.SelectBoardList(params);
-		
-			
-		
-
-		
-		
-//		
-//		
-//		
-//		
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("totalCnt", totalCnt);
-		model.addAttribute("pageNo", page);
-		
-		
-		return "board/boardList";
-	}
 	
 	
 	@RequestMapping(value = "/board/{boardType}/{boardNum}/boardView.do", method = RequestMethod.GET)

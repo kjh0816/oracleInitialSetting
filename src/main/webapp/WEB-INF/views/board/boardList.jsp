@@ -10,61 +10,9 @@
 <script type="text/javascript">
 
 	$j(document).ready(function() {
-		
-		
-		
 
 	});
 	
-	var once = false;
-	
-	function searchByBoardType(){
-		
-		if(!once){
-			
-			once = true;
-			
-			var boardTypes = document.getElementsByName("boardType");
-			
-			var boardTypesChecked = [];
-			
-			for(var i = 0; i < boardTypes.length; i++){
-				if(boardTypes[i].checked){
-					boardTypesChecked.push(boardTypes[i].value);
-				}
-			}	
-			
-			$j.ajax({
-				url : "/board/boardListCheckbox.do",
-				dataType : "text",
-				type : "POST",
-				data : {
-					"boardTypesChecked":boardTypesChecked
-				},
-				success : function(data, textStatus, jqXHR) {
-					alert("Controller 다녀옴");	
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-					alert("실패");
-					
-					alert( jqXHR.status );
-
-					alert( jqXHR.statusText );
-
-					alert( jqXHR.responseText );
-
-					alert( jqXHR.readyState );
-				}
-				
-					
-
-				});
-			
-		}
-		
-			
-
-	}
 	
 	function setBoardType(){
 		
@@ -124,16 +72,16 @@
 		
 			<tr align="left">
 				<td>
-				<form onsubmit="searchByBoardType();" method="POST">
+				<form action="/board/boardList.do" method="POST">
 					<input type="checkbox" name="all" id="all">
 					<span>전체</span>
-					<input type="checkbox" name="boardType" value="a01">
+					<input type="checkbox" name="boardTypesChecked" value="a01">
 					<span>일반</span>
-					<input type="checkbox" name="boardType" value="a02">
+					<input type="checkbox" name="boardTypesChecked" value="a02">
 					<span>Q&A</span>
-					<input type="checkbox" name="boardType" value="a03">
+					<input type="checkbox" name="boardTypesChecked" value="a03">
 					<span>익명</span>
-					<input type="checkbox" name="boardType" value="a04">
+					<input type="checkbox" name="boardTypesChecked" value="a04">
 					<span>자유</span>
 					<button>조회</button>
 					</form>
