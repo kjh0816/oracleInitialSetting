@@ -16,7 +16,7 @@ public interface BoardDao {
 
 	public int selectBoardCnt() throws Exception;
 	
-	public int selectBoardCntByComCode(String boardType) throws Exception;
+	public int selectBoardCntByComCode(HashMap<String, Object> params) throws Exception;
 
 	public int boardInsert(BoardVo boardVo) throws Exception;
 

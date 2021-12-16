@@ -16,14 +16,54 @@
 
 	});
 	
-	
+	var once = false;
 	
 	function searchByBoardType(){
 		
-		var boardType = $j('input[name="boardType"]:checked').val();
+		if(!once){
+			
+			once = true;
+			
+			var boardTypes = document.getElementsByName("boardType");
+			
+			var boardTypesChecked = [];
+			
+			for(var i = 0; i < boardTypes.length; i++){
+				if(boardTypes[i].checked){
+					boardTypesChecked.push(boardTypes[i].value);
+				}
+			}	
+			
+			$j.ajax({
+				url : "/board/boardListCheckbox.do",
+				dataType : "text",
+				type : "POST",
+				data : {
+					"boardTypesChecked":boardTypesChecked
+				},
+				success : function(data, textStatus, jqXHR) {
+					alert("Controller 다녀옴");	
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					alert("실패");
+					
+					alert( jqXHR.status );
 
-		window.location.href='/board/boardList.do?boardType='+boardType;
+					alert( jqXHR.statusText );
+
+					alert( jqXHR.responseText );
+
+					alert( jqXHR.readyState );
+				}
+				
+					
+
+				});
+			
+		}
 		
+			
+
 	}
 	
 	function setBoardType(){
@@ -49,7 +89,7 @@
 		
 	}
 </script>
-<body onload="setBoardType();">
+<body>
 
 	<table align="center">
 		<tr>
@@ -70,8 +110,8 @@
 						<tr>
 							<td align="center">${list.extra__codeName}</td>
 							<td>${list.boardNum}</td>
-							<td><a
-								href="/board/${list.boardType}/${list.boardNum}/boardView.do?pageNo=${pageNo}">${list.boardTitle}</a>
+							<td>
+							<a href="/board/${list.boardType}/${list.boardNum}/boardView.do?pageNo=${pageNo}">${list.boardTitle}</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -84,17 +124,19 @@
 		
 			<tr align="left">
 				<td>
-					<input type="radio" name="boardType" value="all" id="all">
+				<form onsubmit="searchByBoardType();" method="POST">
+					<input type="checkbox" name="all" id="all">
 					<span>전체</span>
-					<input type="radio" name="boardType" value="a01" id="boardNormal">
+					<input type="checkbox" name="boardType" value="a01">
 					<span>일반</span>
-					<input type="radio" name="boardType" value="a02" id="boardQuestion">
+					<input type="checkbox" name="boardType" value="a02">
 					<span>Q&A</span>
-					<input type="radio" name="boardType" value="a03" id="boardAnonymous">
+					<input type="checkbox" name="boardType" value="a03">
 					<span>익명</span>
-					<input type="radio" name="boardType" value="a04" id="boardFree">
+					<input type="checkbox" name="boardType" value="a04">
 					<span>자유</span>
-					<button onClick="searchByBoardType();">조회</button>
+					<button>조회</button>
+					</form>
 				</td>
 			</tr>
 		

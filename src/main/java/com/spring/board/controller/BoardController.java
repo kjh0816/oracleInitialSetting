@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
@@ -34,12 +36,17 @@ public class BoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping(value = "/board/boardList.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/boardList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String boardList(Locale locale
+			, HttpServletRequest request
 			, Model model
 			, PageVo pageVo
-			, @RequestParam(defaultValue="all") String boardType
 			) throws Exception{
+		
+		String[] boardTypesChecked = request.getParameterValues("boardTypesChecked[]");
+		
+		System.out.println("==== 컨트롤러 실행됨 ====");
+		
 		
 		
 		
@@ -55,28 +62,95 @@ public class BoardController {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
 		params.put("pageNo", pageVo.getPageNo());
-		params.put("boardType", boardType);
+		
+		if(boardTypesChecked == null) {
+			// null 인 경우, 전체 게시물을 출력하므로, 전체 게시물을 카운트한다.
+			totalCnt = boardService.selectBoardCnt();
+		}else {
+			params.put("boardType", boardTypesChecked);
+			totalCnt = boardService.selectBoardCntByComCode(params);
+		}
+		
+		
 		
 		
 		boardList = boardService.SelectBoardList(params);
-		if(boardType.equals("all")) {
-			totalCnt = boardService.selectBoardCnt();
-		}
-		else {
-			totalCnt = boardService.selectBoardCntByComCode(boardType);
-		}
+		
+			
+		
+
 		
 		
-		
-		
+//		
+//		
+//		
+//		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("pageNo", page);
 		
-		model.addAttribute("boardType", boardType);
 		
 		return "board/boardList";
 	}
+	
+	
+	@RequestMapping(value = "/board/boardListCheckbox.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String boardListCheckbox(Locale locale
+			, HttpServletRequest request
+			, Model model
+			, PageVo pageVo
+			) throws Exception{
+		
+		String[] boardTypesChecked = request.getParameterValues("boardTypesChecked[]");
+		
+		System.out.println("==== 컨트롤러 실행됨 ====");
+		
+		
+		
+		
+		List<BoardVo> boardList = new ArrayList<BoardVo>();
+		
+		int page = 1;
+		int totalCnt = 0;
+		
+		if(pageVo.getPageNo() == 0){
+			pageVo.setPageNo(page);
+		}
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("pageNo", pageVo.getPageNo());
+		
+		if(boardTypesChecked == null) {
+			// null 인 경우, 전체 게시물을 출력하므로, 전체 게시물을 카운트한다.
+			totalCnt = boardService.selectBoardCnt();
+		}else {
+			params.put("boardType", boardTypesChecked);
+			totalCnt = boardService.selectBoardCntByComCode(params);
+		}
+		
+		
+		
+		
+		boardList = boardService.SelectBoardList(params);
+		
+			
+		
+
+		
+		
+//		
+//		
+//		
+//		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("totalCnt", totalCnt);
+		model.addAttribute("pageNo", page);
+		
+		
+		return "board/boardList";
+	}
+	
 	
 	@RequestMapping(value = "/board/{boardType}/{boardNum}/boardView.do", method = RequestMethod.GET)
 	public String boardView(Locale locale, Model model

@@ -37,9 +37,9 @@ public class boardServiceImpl implements boardService{
 	}
 	
 	@Override
-	public int selectBoardCntByComCode(String boardType) throws Exception {
+	public int selectBoardCntByComCode(HashMap<String, Object> params) throws Exception {
 		// TODO Auto-generated method stub
-		return boardDao.selectBoardCntByComCode(boardType);
+		return boardDao.selectBoardCntByComCode(params);
 	}
 	
 	@Override

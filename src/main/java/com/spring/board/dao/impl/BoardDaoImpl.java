@@ -41,9 +41,9 @@ public class BoardDaoImpl implements BoardDao{
 	}
 	
 	@Override
-	public int selectBoardCntByComCode(String boardType) throws Exception {
+	public int selectBoardCntByComCode(HashMap<String, Object> params) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("board.boardTotalByComCode", boardType);
+		return sqlSession.selectOne("board.boardTotalByComCode", params);
 	}
 	
 	@Override
